@@ -6,18 +6,29 @@
 }
 
 body {
-  background: #111;
+  background: radial-gradient(circle at top, #0f0c29, #302b63, #24243e);
   color: #fff;
+  overflow: hidden;
   text-align: center;
 }
 
+/* Canvas de fundo */
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* HUD */
 #hud {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
-  background: #222;
+  padding: 12px;
+  font-size: 18px;
 }
 
+/* Área do jogo */
 #gameArea {
   position: relative;
   width: 100%;
@@ -25,41 +36,81 @@ body {
   overflow: hidden;
 }
 
+/* Alvos */
 .target {
   position: absolute;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  animation: pop 0.3s ease;
   cursor: pointer;
+  animation: pop 0.3s ease, pulse 1.2s infinite;
 }
 
 .good {
   background: #2ecc71;
+  box-shadow: 0 0 20px #2ecc71, 0 0 40px #2ecc71;
 }
 
 .bad {
   background: #e74c3c;
+  box-shadow: 0 0 20px #e74c3c, 0 0 40px #e74c3c;
 }
 
+/* Animações */
 @keyframes pop {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Explosão */
+.explosion {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  animation: explode 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes explode {
+  from { transform: scale(0.5); opacity: 1; }
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+/* Tremida */
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+/* Pontuação */
+#score {
+  transition: transform 0.2s;
+}
+
+.score-pop {
+  transform: scale(1.4);
+}
+
+/* Telas */
 .screen {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
+  inset: 0;
+  background: rgba(0,0,0,0.85);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,17 +122,18 @@ body {
   display: none;
 }
 
+/* Botões */
 button {
   margin-top: 15px;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border: none;
-  background: #3498db;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
   color: #fff;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 button:hover {
-  background: #2980b9;
+  filter: brightness(1.2);
 }
