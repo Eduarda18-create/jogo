@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reflex Master</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="startScreen" class="screen">
+    <h1>🎯 Reflex Master</h1>
+    <p>Clique nos alvos verdes e evite os vermelhos</p>
+    <button id="startBtn">Iniciar Jogo</button>
+  </div>
+
+  <div id="hud">
+    <span>Pontos: <strong id="score">0</strong></span>
+    <span>Vidas: <strong id="lives">3</strong></span>
+  </div>
+
+  <div id="gameArea"></div>
+
+  <div id="gameOverScreen" class="screen hidden">
+    <h1>💀 Game Over</h1>
+    <p>Sua pontuação: <strong id="finalScore"></strong></p>
+    <button id="restartBtn">Jogar Novamente</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
